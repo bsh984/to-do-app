@@ -6,30 +6,42 @@ function onReady() {
   addToDoForm.addEventListener('submit', event => {
     event.preventDefault();
 
-    //get the text
-    let title = newToDoText.value;
+        //get the text
+        let title = newToDoText.value;
 
-    //create a new li
-    let newLi = document.createElement('li');
+        //create a new li and Ul. li for structure only
+        let newLi = document.createElement('li');
 
-    //create a new input
-    let checkbox = document.createElement('input');
+        newLi.textContent= title;
 
-    //set the input's type to checkbox
-    checkbox.type = "checkbox";
+        //create a new input
+        let checkbox = document.createElement('input');
+        let delButton = document.createElement('button');
 
-    //set text of new line item to value of title
-    newLi.textContent = title;
+        //set the input's type to checkbox
+        checkbox.type = "checkbox";
 
-    //attach the checkbox to the li
-    newLi.appendChild(checkbox);
+        // label button & provide delete functionality
+        delButton.innerHTML ="delete"
+        delButton.addEventListener('click', function() {
+             newLi.parentNode.removeChild(newLi);
+           });
 
-    //attach the li to the ul
-    toDoList.appendChild(newLi);
+        //attach the checkbox to the li
+        newLi.appendChild(checkbox);
+        newLi.appendChild(delButton);
 
-    //empty the input
-    newToDoText.value = '';
+        //attach the li to the ul
+        toDoList.appendChild(newLi);
+
+        //empty the input
+        newToDoText.value = '';
+        //
+        // toDoList.addEventListener('click', event => {
+        //   newLi.delete;
+        // });
   });
+
 }
 
 window.onload = function() {

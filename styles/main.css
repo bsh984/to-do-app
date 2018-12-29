@@ -1,0 +1,45 @@
+/* #addToDoButton {
+  color:#0000ee;
+} */
+
+body {
+  background-color: #eee;
+}
+
+.box {
+    padding: 5px 0 0 20px;
+    height: 10vh;
+}
+
+header {
+  background: url(../images/functional-hero-image.jpg) center / cover;
+  height: 25vh;
+  justify-content: center;
+  /* padding: 0px; */
+  text-align: center;
+  vertical-align: top;
+}
+
+h1 {
+  color: #fff;
+
+}
+
+label {
+  padding-right: 8px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.slogan {
+  color: rgba(255,255,255,0.6);
+  font-size: 1.6rem;
+  font-weight: lighter;
+}
+
+#toDoList {
+  padding-left: 10px;
+  line-height: 2rem;
+}
