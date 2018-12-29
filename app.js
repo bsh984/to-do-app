@@ -6,25 +6,25 @@ function onReady() {
   addToDoForm.addEventListener('submit', event => {
     event.preventDefault();
 
-    // get the text
+    //get the text
     let title = newToDoText.value;
 
-    // create a new li
+    //create a new li
     let newLi = document.createElement('li');
 
-    // create a new input
+    //create a new input
     let checkbox = document.createElement('input');
 
-    // set the input's type to checkbox
+    //set the input's type to checkbox
     checkbox.type = "checkbox";
 
-    // set the title
+    //set text of new line item to value of title
     newLi.textContent = title;
 
-    // attach the checkbox to the li
+    //attach the checkbox to the li
     newLi.appendChild(checkbox);
 
-    // attach the li to the ul
+    //attach the li to the ul
     toDoList.appendChild(newLi);
 
     //empty the input
