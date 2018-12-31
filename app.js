@@ -1,35 +1,54 @@
+// one function with embedded functions that's called when window is loaded
 function onReady() {
+  //declare toDos as blank array
+  const toDos = [];
+  //assign ID to var addToDoForm. now can use addToDoForm and manipulate
   const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
 
-  addToDoForm.addEventListener('submit', event => {
-    event.preventDefault();
+  //declare createNewToDo function
+  function createNewToDo() {
+    const newToDoText = document.getElementById('newToDoText');
+    if (!newToDoText.value) { return; }
 
-    //get the text
-    let title = newToDoText.value;
-
-    //create a new li
-    let newLi = document.createElement('li');
-
-    //create a new input
-    let checkbox = document.createElement('input');
-
-    //set the input's type to checkbox
-    checkbox.type = "checkbox";
-
-    //set text of new line item to value of title
-    newLi.textContent = title;
-
-    //attach the checkbox to the li
-    newLi.appendChild(checkbox);
-
-    //attach the li to the ul
-    toDoList.appendChild(newLi);
-
-    //empty the input
+    // create new array object each time createNewToDo is executed
+    toDos.push({
+      title: newToDoText.value,
+      complete: false
+    });
+    // set newToDoText value used by the field to empty
     newToDoText.value = '';
+
+    // need this here to update the UI based on changes in state
+    // since the event handler below will preventDefault submit behavior
+    // otherwise the renderTheUI will never get called
+    renderTheUI();
+  }
+
+  function renderTheUI() {
+    const toDoList = document.getElementById('toDoList');
+
+    toDoList.textContent = '';
+    
+    toDos.forEach(function(toDo){
+      const newLi = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = "checkbox";
+
+      newLi.textContent = toDo.title;
+
+      toDoList.appendChild(newLi);
+      newLi.appendChild(checkbox);
+    });
+  }
+
+  //event listener will trigger event handler/execute the functions declared above
+  addToDoForm.addEventListener('submit',event => {
+    event.preventDefault();
+    createNewToDo();
   });
+
+  // on initial load, the UI needs to be rendered. it'll just appear blank
+  renderTheUI();
 }
 
 window.onload = function() {
