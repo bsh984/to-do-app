@@ -11,6 +11,9 @@ function onReady() {
     const newToDoText = document.getElementById('newToDoText');
     if (!newToDoText.value) { return; }
 
+    let unparsedToDos = localStorage.getItem('toDosString');
+    toDos = JSON.parse(unparsedToDos);
+
     // note to self: create new array object each time createNewToDo is executed
     toDos.push({
       title: newToDoText.value
@@ -35,8 +38,16 @@ function onReady() {
 
     toDos.forEach(function(toDo){
       const newLi = document.createElement('li');
+
       const checkbox = document.createElement('input');
       checkbox.type = "checkbox";
+      checkbox.addEventListener('change',function() {
+        if (this.checked) {
+          toDo.complete=true;
+        } else {
+          toDo.complete=false;
+        };
+      });
 
       const delButton = document.createElement('button');
       delButton.type = "button";
@@ -55,6 +66,8 @@ function onReady() {
       toDoList.appendChild(newLi);
       newLi.appendChild(checkbox);
       newLi.appendChild(delButton);
+
+      localStorage.setItem('toDosString',JSON.stringify(toDos));
     });
   }
 
