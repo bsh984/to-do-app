@@ -2,7 +2,6 @@
 function onReady() {
   //declare toDos as blank array
   const toDos = [];
-  // let id=0;
 
   const addToDoForm = document.getElementById('addToDoForm');
 
@@ -15,10 +14,8 @@ function onReady() {
     toDos.push({
       title: newToDoText.value,
       complete: false
-      // id: id
     });
 
-    // id++;
     // set newToDoText value used by the field to empty
     newToDoText.value = '';
 
@@ -39,20 +36,14 @@ function onReady() {
       checkbox.type = "checkbox";
 
       const delButton = document.createElement('button');
-      button.type = "button";
-
-
-      // for assignment checker - i'm stuck here... how do I use the filter technique?
-      delButton.addEventListener('click',event => {
-        toDos = toDos.filter(toDo => toDo.id!==id);
-        renderTheUI();
-      });
+      // button.label = "asdf";
+      // button.type = "button";
 
       newLi.textContent = toDo.title;
 
       toDoList.appendChild(newLi);
       newLi.appendChild(checkbox);
-      // newLi.appendChild(delButton);
+      newLi.appendChild(delButton);
     });
   }
 
