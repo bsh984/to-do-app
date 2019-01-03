@@ -1,7 +1,8 @@
 // one function with embedded functions that's called when window is loaded
 function onReady() {
   //declare toDos as blank array
-  const toDos = [];
+  let toDos = [];
+  let id=0;
 
   const addToDoForm = document.getElementById('addToDoForm');
 
@@ -12,12 +13,14 @@ function onReady() {
 
     // note to self: create new array object each time createNewToDo is executed
     toDos.push({
-      title: newToDoText.value,
-      complete: false
+      title: newToDoText.value
+      ,complete: false
+      ,id: id
     });
 
     // set newToDoText value used by the field to empty
     newToDoText.value = '';
+    id++;
 
     // note to self: need this here to update the UI based on changes in state
     // since the event handler below will preventDefault submit behavior
@@ -36,8 +39,16 @@ function onReady() {
       checkbox.type = "checkbox";
 
       const delButton = document.createElement('button');
-      // button.label = "asdf";
-      // button.type = "button";
+      delButton.type = "button";
+      delButton.innerHTML = "Delete";
+
+      delButton.addEventListener('click', () => {
+        toDos = toDos.filter(function(toDoBeingFiltered){
+          return toDoBeingFiltered.id !== toDo.id;
+        });
+
+        renderTheUI();
+      });
 
       newLi.textContent = toDo.title;
 
